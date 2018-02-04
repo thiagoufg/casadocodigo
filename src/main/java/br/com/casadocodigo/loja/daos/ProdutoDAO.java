@@ -31,9 +31,6 @@ public class ProdutoDAO {
 		Query q = manager.createQuery("select p from Produto p join fetch p.precos preco where p.id = :id", Produto.class);
 		q.setParameter("id", id);
 		Produto p = (Produto) q.getSingleResult();
-//		if(p!=null && p.getPrecos()!=null && !p.getPrecos().isEmpty()) {
-//			p.getPrecos();
-//		}
 		return p;
 		
 	}
