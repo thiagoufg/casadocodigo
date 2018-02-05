@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,15 +12,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION)
-public class CarrinhoCompras {
+public class CarrinhoCompras implements Serializable {
 
+	private static final long serialVersionUID = -2106272778536854933L;
 	private Map<CarrinhoItem, Integer> itens = new HashMap<CarrinhoItem, Integer>();
 	
 	public void add(CarrinhoItem carrinhoItem) {
 		itens.put(carrinhoItem, getQuantidade(carrinhoItem) + 1);
 	}
 
-	private int getQuantidade(CarrinhoItem carrinhoItem) {
+	public int getQuantidade(CarrinhoItem carrinhoItem) {
 		if(!itens.containsKey(carrinhoItem))
 			itens.put(carrinhoItem, 0);
 		return itens.get(carrinhoItem);
@@ -35,5 +37,13 @@ public class CarrinhoCompras {
 	
 	public BigDecimal getTotal(CarrinhoItem item) {
 		return item.getTotal(getQuantidade(item));
+	}
+	
+	public BigDecimal getTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+		for (CarrinhoItem item : itens.keySet()) {
+			total = total.add(getTotal(item));
+		}
+		return total;
 	}
 }
