@@ -7,11 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@Scope(value=WebApplicationContext.SCOPE_SESSION)
+@Scope(value=WebApplicationContext.SCOPE_SESSION,
+		proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoCompras implements Serializable {
 
 	private static final long serialVersionUID = -2106272778536854933L;
@@ -46,4 +48,9 @@ public class CarrinhoCompras implements Serializable {
 		}
 		return total;
 	}
+
+	public void remove(CarrinhoItem carrinhoItem) {
+		itens.remove(carrinhoItem);
+	}
+
 }
