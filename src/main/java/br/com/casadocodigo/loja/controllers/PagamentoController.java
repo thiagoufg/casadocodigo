@@ -1,5 +1,7 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.util.concurrent.Callable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +25,18 @@ public class PagamentoController {
 	private RestTemplate restTemplate;
 	
 	@RequestMapping(value="/finalizar", method=RequestMethod.POST)
-	public ModelAndView finalizar(RedirectAttributes model) {
-		ModelAndView mav = new ModelAndView("redirect:/produtos");
-		String uri = "http://book-payment.herokuapp.com/payment";
-		try {
-			String response = restTemplate.postForObject(uri, new DadosPagamento(carrinhoCompras.getTotal()), String.class);
-			model.addFlashAttribute("sucesso", response+carrinhoCompras.getTotal());
-			
-		} catch (HttpClientErrorException e) {
-			model.addFlashAttribute("falha", e.getMessage());
-		}
-		return mav;
+	public Callable<ModelAndView> finalizar(RedirectAttributes model) {
+		return () -> {
+			ModelAndView mav = new ModelAndView("redirect:/produtos");
+			String uri = "http://book-payment.herokuapp.com/payment";
+			try {
+				String response = restTemplate.postForObject(uri, new DadosPagamento(carrinhoCompras.getTotal()), String.class);
+				model.addFlashAttribute("sucesso", response+carrinhoCompras.getTotal());
+				
+			} catch (HttpClientErrorException e) {
+				model.addFlashAttribute("falha", e.getMessage());
+			}
+			return mav;
+		};
 	}
 }
