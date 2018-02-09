@@ -80,12 +80,4 @@ public class ProdutosController {
 		modelAndView.addObject("produto", found);
 		return modelAndView;
 	}
-	
-	@RequestMapping("/{id}")
-	@ResponseBody
-	public Produto detalheJson(@PathVariable("id")Integer id) {
-		Produto found = produtoDAO.find(id);
-		return found;
-	}
-
 }
