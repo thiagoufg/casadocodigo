@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html class="no-js" lang="pt">
@@ -11,11 +11,43 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>${produto.titulo}</title>
+<c:url value="/resources/css" var="cssPath" />
+<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
+<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
+<style type="text/css">
+body {
+	padding: 60px 0px;
+}
+</style>
 </head>
 
 <c:url value="/shopping" var="shoppingCartUrl" />
 <body class="produto">
-
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="${s:mvcUrl('HC#index').build()}">Casa do Código</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="${s:mvcUrl('PC#listar').build()}">Lista de
+							Produtos</a></li>
+					<li><a href="${s:mvcUrl('PC#form').build()}">Cadastro de
+							Produtos</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+	</nav>
+<div class="container">
 	<a href='<c:url value="/carrinho"/>'>Seu carrinho (${carrinhoCompras.quantidade })</a>
 
 	<article id="${produto.id}" itemscope itemtype="http://schema.org/Book">
@@ -81,6 +113,7 @@
 			</section>
 		</div>
 	</article>
+</div>
 
 </body>
 </html>
