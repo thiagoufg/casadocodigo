@@ -19,7 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -33,13 +35,13 @@ import br.com.casadocodigo.loja.utils.FileUtils;
 @EnableWebMvc
 @ComponentScan(basePackageClasses = { HomeController.class, ProdutoDAO.class, FileUtils.class, CarrinhoCompras.class })
 @EnableCaching
-public class AppWebConfiguration {
+public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolve() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		//resolver.setExposeContextBeansAsAttributes(true);
+		// resolver.setExposeContextBeansAsAttributes(true);
 		resolver.setExposedContextBeanNames("carrinhoCompras");
 		return resolver;
 	}
@@ -61,25 +63,26 @@ public class AppWebConfiguration {
 		dfr.registerFormatters(cs);
 		return cs;
 	}
-	
+
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
-	
+
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-	
+
 	@Bean
 	public CacheManager cacheManager() {
-		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(30, TimeUnit.SECONDS);
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(30,
+				TimeUnit.SECONDS);
 		GuavaCacheManager gcm = new GuavaCacheManager();
 		gcm.setCacheBuilder(builder);
 		return gcm;
 	}
-	
+
 	@Bean
 	public ViewResolver contentNegotiationViewResolver(ContentNegotiationManager man) {
 		ArrayList<ViewResolver> lista = new ArrayList<ViewResolver>();
@@ -89,5 +92,9 @@ public class AppWebConfiguration {
 		resolver.setViewResolvers(lista);
 		resolver.setContentNegotiationManager(man);
 		return resolver;
+	}
+	
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	    configurer.enable();
 	}
 }
