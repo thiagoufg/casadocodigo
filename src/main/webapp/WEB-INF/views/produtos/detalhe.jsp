@@ -1,23 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<!DOCTYPE html>
-<html class="no-js" lang="pt">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>${produto.titulo}</title>
-</head>
-
-<c:url value="/shopping" var="shoppingCartUrl" />
-<body class="produto">
-
-	<%@ include file="/WEB-INF/views/cabecalho.jsp" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+<tags:pageTemplate titulo="Livros de Java, Android, IOs, Mobile e muito mais...">
+     
 	<article id="${produto.id}" itemscope itemtype="http://schema.org/Book">
 		<header id="produto-highlight" class="clearfix">
 			<div id="produto-overview" class="container">
@@ -82,7 +71,5 @@
 		</div>
 	</article>
 	
-	<%@ include file="/WEB-INF/views/rodape.jsp" %>
-
-</body>
-</html>
+    
+</tags:pageTemplate>

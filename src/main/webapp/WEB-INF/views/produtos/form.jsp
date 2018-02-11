@@ -1,24 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais -
-	Casa do Código</title>
-<c:url value="/resources/css" var="cssPath" />
-<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
-<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
-<style type="text/css">
-body {
-	padding: 60px 0px;
-}
-</style>
-</head>
-<body>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="tags" %>
+
+<tags:pageTemplate titulo="Livros de Java, Android, IOs, Mobile e muito mais...">
+     
 	<%@ include file="/WEB-INF/views/cabecalho.jsp" %>
 	<div class="container">
 		<h1>Cadastro de Produto</h1>
@@ -61,6 +50,5 @@ body {
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form:form>
 	</div>
-	<%@ include file="/WEB-INF/views/rodape.jsp" %>
-</body>
-</html>
+
+</tags:pageTemplate>

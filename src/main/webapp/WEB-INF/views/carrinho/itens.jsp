@@ -4,23 +4,10 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<html>
-<head>
-<c:url value="/" var="contextPath" />
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Livros de Java, SOA, Android, iPhone, Ruby on Rails e
-	muito mais - Casa do Código</title>
-<c:url value="/resources/css" var="cssPath" />
-<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
-<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
-</head>
-<body>
-	<%@ include file="/WEB-INF/views/cabecalho.jsp" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 
+<tags:pageTemplate titulo="Livros de Java, Android, IOs, Mobile e muito mais...">
+     
 	<section class="container middle">
 		<h2 id="cart-title">Seu carrinho de compras
 			(${carrinhoCompras.quantidade})</h2>
@@ -66,12 +53,12 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<form action='${s:mvcUrl("PC#finalizar").build()}' method="post">
+					<form:form action='${s:mvcUrl("PC#finalizar").build()}' method="post">
 						<td colspan="3"><input type="submit" class="checkout"
 							name="checkout" value="Finalizar compra" /></td>
 	
 						<td class="numeric-cell">${carrinhoCompras.getTotal() }
-					</form>
+					</form:form>
 					</td>
 					<td></td>
 				</tr>
@@ -79,7 +66,5 @@
 		</table>
 
 	</section>
-
-	<%@ include file="/WEB-INF/views/rodape.jsp" %>
-</body>
-</html>
+    
+</tags:pageTemplate>

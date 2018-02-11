@@ -1,26 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais -
-		Casa do Código</title>
-	<c:url value="/resources/css" var="cssPath" />
-	<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
-	<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
-	<style type="text/css">
-		body {
-			padding-top: 60px;
-		}
-	</style>
-</head>
-<body>
-
-	<%@ include file="/WEB-INF/views/cabecalho.jsp" %>
+<tags:pageTemplate titulo="Livros de Java, Android, IOs, Mobile e muito mais...">
 	
 	<div class="container">
 		<h1>Lista de Produtos</h1>
@@ -45,6 +31,4 @@
 		</table>
 	</div>
 	
-	<%@ include file="/WEB-INF/views/rodape.jsp" %>
-</body>
-</html>
+</tags:pageTemplate>
