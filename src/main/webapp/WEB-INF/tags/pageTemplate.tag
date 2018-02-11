@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ attribute name="titulo" required="true" %>
+<%@ attribute name="extraScripts" fragment="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,8 @@
     <%@ include file="/WEB-INF/views/cabecalho.jsp" %>
 
     <jsp:doBody />
+    
+    <jsp:invoke fragment="extraScripts"></jsp:invoke>
 
     <%@ include file="/WEB-INF/views/rodape.jsp" %>
 
