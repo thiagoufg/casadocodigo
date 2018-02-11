@@ -16,7 +16,7 @@
 <c:url value="/shopping" var="shoppingCartUrl" />
 <body class="produto">
 
-	<a href='<c:url value="/carrinho"/>'>Seu carrinho (${carrinhoCompras.quantidade })</a>
+	<%@ include file="/WEB-INF/views/cabecalho.jsp" %>
 
 	<article id="${produto.id}" itemscope itemtype="http://schema.org/Book">
 		<header id="produto-highlight" class="clearfix">
@@ -81,6 +81,8 @@
 			</section>
 		</div>
 	</article>
+	
+	<%@ include file="/WEB-INF/views/rodape.jsp" %>
 
 </body>
 </html>
